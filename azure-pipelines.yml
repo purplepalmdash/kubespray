@@ -16,21 +16,15 @@ steps:
     sudo apt-get install -y python-pip
     pip install wheel
     pip install ansible==2.8.3
+    export PATH=/home/vsts/.local/bin/:$PATH
     which ansible
-    ls -l -h /usr/local/bin
-    /usr/local/bin/ansible --version
-    echo "################After pip#################"
-    sudo pip install wheel
-    sudo pip install ansible==2.8.3
-    which ansible
-    ls -l -h /usr/local/bin
-    /usr/local/bin/ansible --version
-    export PATH=/usr/local/bin:$PATH
-    which ansible
-    python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"
     ansible --version
-    echo "################After sudo pip#################"
-    sudo find /usr/lib/python2.7 | grep ansible
+    echo "################After pip#################"
+    # sudo pip install wheel
+    #sudo pip install ansible==2.8.3
+    #which ansible
+    #ansible --version
+    #echo "################After sudo pip#################"
     echo "################Try to find ansible#################"
     sudo find /home/vsts/.local/ | grep ansible
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
@@ -47,9 +41,8 @@ steps:
     rm -f ${INVENTORY_DIR}/hosts.ini
     cat /tmp/kubespray.dind.inventory_builder.sh
     ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
-    CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
-    ##*docker ps
-    ##*cat ${INVENTORY_DIR}/hosts.ini
+    sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
+    cat ${INVENTORY_DIR}/hosts.ini
     ##*ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     #sudo docker ps
     #sudo docker exec kube-node1 kubectl get node
