@@ -10,6 +10,7 @@ steps:
     which ansible
     ansible --version
     ls -l -h /usr/local/bin
+    apt-cache policy ansible
     sudo apt-get purge ansible
     sudo apt-get update -y
     sudo apt-get install -y python-pip
@@ -29,6 +30,7 @@ steps:
     python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"
     ansible --version
     echo "################After sudo pip#################"
+    sudo find /usr/lib/python2.7 | grep ansible
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
     cd contrib/dind
     # Install ansible
