@@ -8,30 +8,28 @@ pool:
 steps:
 - script: |
     free -m && df -h && cat /etc/issue && cat /proc/cpuinfo && uname -a
+    sudo bash
+    su root
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
-    sudo apt-get update -y
-    sudo apt-get install -y python-pip
+    apt-get update -y
+    apt-get install -y python-pip
     cd contrib/dind
     # Install ansible
-    sudo pip install -r requirements.txt
-    sudo pip install ruamel.yaml
+    pip install -r requirements.txt
     pip install ruamel.yaml
-    sudo pip3 install ruamel.yaml
     pip3 install ruamel.yaml
-    sudo pip3 install ruamel.yml
     pip3 install ruamel.yml
-    sudo pip install ruamel.yml
     pip install ruamel.yml
     # Create the node containers
-    sudo ansible-playbook -i hosts dind-cluster.yaml
+    ansible-playbook -i hosts dind-cluster.yaml
     cd ../../
     INVENTORY_DIR=inventory/local-dind
-    sudo mkdir -p ${INVENTORY_DIR}
-    sudo rm -f ${INVENTORY_DIR}/hosts.ini
-    sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
-    sudo docker ps
-    sudo cat ${INVENTORY_DIR}/hosts.ini
-    sudo ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    sudo docker ps
-    sudo docker exec kube-node1 kubectl get node
-    sudo docker exec kube-node1 kubectl get pod --all-namespaces
+    mkdir -p ${INVENTORY_DIR}
+    rm -f ${INVENTORY_DIR}/hosts.ini
+    CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
+    docker ps
+    cat ${INVENTORY_DIR}/hosts.ini
+    ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    #sudo docker ps
+    #sudo docker exec kube-node1 kubectl get node
+    #sudo docker exec kube-node1 kubectl get pod --all-namespaces
