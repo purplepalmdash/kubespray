@@ -18,12 +18,12 @@ steps:
     sudo ansible-playbook -i hosts dind-cluster.yaml
     cd ../../
     INVENTORY_DIR=inventory/local-dind
-    mkdir -p ${INVENTORY_DIR}
-    rm -f ${INVENTORY_DIR}/hosts.ini
-    CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
-    docker ps
-    cat ${INVENTORY_DIR}/hosts.ini
-    ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    docker ps
-    docker exec kube-node1 kubectl get node
-    docker exec kube-node1 kubectl get pod --all-namespaces
+    sudo mkdir -p ${INVENTORY_DIR}
+    sudo rm -f ${INVENTORY_DIR}/hosts.ini
+    sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
+    sudo docker ps
+    sudo cat ${INVENTORY_DIR}/hosts.ini
+    sudo ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    sudo docker ps
+    sudo docker exec kube-node1 kubectl get node
+    sudo docker exec kube-node1 kubectl get pod --all-namespaces
