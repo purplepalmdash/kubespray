@@ -31,6 +31,8 @@ steps:
     ansible --version
     echo "################After sudo pip#################"
     sudo find /usr/lib/python2.7 | grep ansible
+    echo "################Try to find ansible#################"
+    sudo find /home/vsts/.local/ | grep ansible
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
     cd contrib/dind
     # Install ansible
