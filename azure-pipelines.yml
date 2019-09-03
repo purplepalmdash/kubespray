@@ -9,14 +9,20 @@ steps:
 - script: |
     which ansible
     ansible --version
+    ls -l -h /usr/local/bin
     sudo apt-get purge ansible
     pip install wheel
     pip install ansible==2.8.3
     which ansible
-    ansible --version
+    ls -l -h /usr/local/bin
+    /usr/local/bin/ansible --version
     echo "################After pip#################"
     sudo pip install wheel
     sudo pip install ansible==2.8.3
+    which ansible
+    ls -l -h /usr/local/bin
+    /usr/local/bin/ansible --version
+    export PATH=/usr/local/bin:$PATH
     which ansible
     ansible --version
     echo "################After sudo pip#################"
