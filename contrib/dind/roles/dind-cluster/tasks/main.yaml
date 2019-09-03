@@ -24,17 +24,17 @@
     # disable selinux-isms, sp needed if running on non-Selinux host
     - /usr/sbin/semodule
 
-- name: Keep deb caches
-  file:
-    src: "/bin/true"
-    dest: "{{ item }}"
-    state: link
-    force: yes
-  with_items:
-    # Ubuntu should not clean the pkgs, cause I will use them
-    - rm -f /etc/apt/apt.conf.d/docker-clean
-  when:
-    - ansible_os_family == 'Debian'
+#- name: Keep deb caches
+#  file:
+#    src: "/bin/true"
+#    dest: "{{ item }}"
+#    state: link
+#    force: yes
+#  with_items:
+#    # Ubuntu should not clean the pkgs, cause I will use them
+#    - rm -f /etc/apt/apt.conf.d/docker-clean
+#  when:
+#    - ansible_os_family == 'Debian'
 
 - name: Void installing dpkg docs and man pages on Debian based distros
   copy:
