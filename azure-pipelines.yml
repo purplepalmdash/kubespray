@@ -8,8 +8,11 @@ pool:
 steps:
 - script: |
     free -m && df -h && cat /etc/issue && cat /proc/cpuinfo && uname -a
+    ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
     sudo apt-get update -y
     sudo apt-get install -y python-pip
     cd contrib/dind
     sudo pip install -r requirements.txt
-    sudo ansible-playbook -i hosts dind-cluster.yaml
+    sudo ansible-playbook -i hosts dind-cluster.yaml  --extra-vars node_distro=ubuntu
+    sudo docker exec kube-node1 kubectl get node
+    sudo docker exec kube-node1 kubectl get pod --all-namespaces
