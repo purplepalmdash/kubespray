@@ -7,7 +7,7 @@ pool:
 
 steps:
 - script: |
-    free -m && df -h && cat /etc/issue && cat /proc/cpuinfo && uname -a
+    which ansible
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
     sudo apt-get update -y
     sudo apt-get install -y python-pip
@@ -19,17 +19,17 @@ steps:
     pip3 install ruamel.yml
     pip install ruamel.yml
     # Create the node containers
-    ansible-playbook -i hosts dind-cluster.yaml
-    cd ../../
-    INVENTORY_DIR=inventory/local-dind
-    mkdir -p ${INVENTORY_DIR}
-    rm -f ${INVENTORY_DIR}/hosts.ini
-    cat /tmp/kubespray.dind.inventory_builder.sh
-    ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
-    CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
-    docker ps
-    cat ${INVENTORY_DIR}/hosts.ini
-    ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    ##*ansible-playbook -i hosts dind-cluster.yaml
+    ##*cd ../../
+    ##*INVENTORY_DIR=inventory/local-dind
+    ##*mkdir -p ${INVENTORY_DIR}
+    ##*rm -f ${INVENTORY_DIR}/hosts.ini
+    ##*cat /tmp/kubespray.dind.inventory_builder.sh
+    ##*ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
+    ##*CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
+    ##*docker ps
+    ##*cat ${INVENTORY_DIR}/hosts.ini
+    ##*ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     #sudo docker ps
     #sudo docker exec kube-node1 kubectl get node
     #sudo docker exec kube-node1 kubectl get pod --all-namespaces
