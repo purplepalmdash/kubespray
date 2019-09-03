@@ -14,6 +14,8 @@ steps:
     cd contrib/dind
     # Install ansible
     sudo pip install -r requirements.txt
+    sudo pip install ruamel.yaml
+    pip install ruamel.yaml
     # Create the node containers
     sudo ansible-playbook -i hosts dind-cluster.yaml
     cd ../../
