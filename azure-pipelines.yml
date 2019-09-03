@@ -10,10 +10,12 @@ steps:
     which ansible
     ansible --version
     sudo apt-get purge ansible
+    pip install wheel
     pip install ansible==2.8.3
     which ansible
     ansible --version
     echo "################After pip#################"
+    sudo pip install wheel
     sudo pip install ansible==2.8.3
     which ansible
     ansible --version
