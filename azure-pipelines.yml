@@ -8,11 +8,9 @@ pool:
 steps:
 - script: |
     free -m && df -h && cat /etc/issue && cat /proc/cpuinfo && uname -a
-    sudo bash
-    su root
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
-    apt-get update -y
-    apt-get install -y python-pip
+    sudo apt-get update -y
+    sudo apt-get install -y python-pip
     cd contrib/dind
     # Install ansible
     pip install -r requirements.txt
@@ -26,6 +24,8 @@ steps:
     INVENTORY_DIR=inventory/local-dind
     mkdir -p ${INVENTORY_DIR}
     rm -f ${INVENTORY_DIR}/hosts.ini
+    cat /tmp/kubespray.dind.inventory_builder.sh
+    ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
     CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
     docker ps
     cat ${INVENTORY_DIR}/hosts.ini
