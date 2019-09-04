@@ -11,14 +11,14 @@ steps:
     sudo apt-get update -y
     sudo apt-get install -y python-pip
     pip install wheel
-    pip install ansible==2.8.3
+    echo "##########Install requirements#########"
+    pip install -r requirements.txt
+    echo "##########After Install requirements#########"
+    #pip install ansible==2.8.3
     export PATH=/home/vsts/.local/bin/:$PATH
     which ansible
     ansible --version
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
-    echo "##########Install requirements#########"
-    pip install -r requirements.txt
-    echo "##########After Install requirements#########"
     cd contrib/dind
     pip install -r requirements.txt
     # Create the node containers
