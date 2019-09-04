@@ -8,6 +8,9 @@ pool:
 steps:
 - script: |
     free -m && df -h && cat /proc/cpuinfo
+    docker version
+    echo "##########Get docker version#########"
+    sudo docker version
     sudo apt-get purge ansible
     sudo apt-get update -y
     sudo apt-get install -y python-pip
