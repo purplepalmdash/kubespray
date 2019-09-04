@@ -11,6 +11,8 @@ steps:
     docker version
     echo "##########Get docker version#########"
     sudo docker version
+    sudo docker info
+    sudo dpkg -l | grep docker
     sudo apt-get purge ansible
     sudo apt-get update -y
     sudo apt-get install -y python-pip
@@ -43,6 +45,7 @@ steps:
     ping -c1 172.17.0.3
     ping -c1 172.17.0.4
     echo "##########After ping it#########"
+    sudo docker exec kube-node1 docker version
     #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     sudo docker exec kube-node1 kubectl get node
