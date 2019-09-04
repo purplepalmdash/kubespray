@@ -15,6 +15,7 @@ distro_settings:
     <<: *DEBIAN
     image: "ubuntu:16.04"
     user: "ubuntu"
+    pid1_exe: /lib/systemd/systemd
     init: |
       /sbin/init
     raw_setup: apt-get -qy update && apt-get -qy install dbus python sudo iproute2

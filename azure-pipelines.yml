@@ -7,6 +7,7 @@ pool:
 
 steps:
 - script: |
+    free -m && df -h && cat /proc/cpuinfo
     sudo apt-get purge ansible
     sudo apt-get update -y
     sudo apt-get install -y python-pip
@@ -14,7 +15,6 @@ steps:
     echo "##########Install requirements#########"
     pip install -r requirements.txt
     echo "##########After Install requirements#########"
-    #pip install ansible==2.8.3
     export PATH=/home/vsts/.local/bin/:$PATH
     which ansible
     ansible --version
@@ -35,6 +35,11 @@ steps:
     ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
     sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
     cat ${INVENTORY_DIR}/hosts.yml
+    echo "##########ping it#########"
+    ping -c1 172.17.0.2
+    ping -c1 172.17.0.3
+    ping -c1 172.17.0.4
+    echo "##########After ping it#########"
     #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     sudo docker exec kube-node1 kubectl get node
