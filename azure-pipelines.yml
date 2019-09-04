@@ -18,6 +18,9 @@ steps:
     export PATH=/home/vsts/.local/bin/:$PATH
     which ansible
     ansible --version
+    which ping
+    sudo apt-get install -y iputils-ping
+    which ping
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
     cd contrib/dind
     pip install -r requirements.txt
