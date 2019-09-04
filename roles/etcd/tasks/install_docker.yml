@@ -1,6 +1,6 @@
 ---
 - name: Install | Copy etcdctl binary from docker container
-  command: sh -c "uptime; 
+  command: sh -c "docker info; systemctl start docker; docker info; docker images;
            {{ docker_bin_dir }}/docker create --name etcdctl-binarycopy {{ etcd_image_repo }}:{{ etcd_image_tag }} &&
            {{ docker_bin_dir }}/docker cp etcdctl-binarycopy:/usr/local/bin/etcdctl {{ bin_dir }}/etcdctl &&
            uptime"
