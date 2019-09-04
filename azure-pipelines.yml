@@ -8,7 +8,11 @@ pool:
 steps:
 - script: |
     free -m && df -h && cat /proc/cpuinfo
-    sudo dpkg -l
+    #sudo dpkg -l
+    sudo cat /etc/docker/docker.json
+    sudo cat /etc/systemd/system/multi-user.target.wants/docker.service
+    sudo dpkg -S /usr/bin/docker
+
     #*echo "##########################show dmesg ########################"
     #*dmesg
     #*echo "##########################END show dmesg ########################"
