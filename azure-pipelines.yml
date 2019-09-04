@@ -29,10 +29,11 @@ steps:
     sudo find /home/vsts/.local/ | grep ansible
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
     cd contrib/dind
+    pip install -r requirements.txt
     # Install ansible
     pip install -r requirements.txt
-    pip install ruamel.yaml
-    pip3 install ruamel.yaml
+    #pip install ruamel.yaml
+    #pip3 install ruamel.yaml
     # Create the node containers
     ansible-playbook -i hosts dind-cluster.yaml
     cd ../../
