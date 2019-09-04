@@ -7,10 +7,6 @@ pool:
 
 steps:
 - script: |
-    which ansible
-    ansible --version
-    ls -l -h /usr/local/bin
-    apt-cache policy ansible
     sudo apt-get purge ansible
     sudo apt-get update -y
     sudo apt-get install -y python-pip
@@ -19,21 +15,12 @@ steps:
     export PATH=/home/vsts/.local/bin/:$PATH
     which ansible
     ansible --version
-    echo "################After pip#################"
-    # sudo pip install wheel
-    #sudo pip install ansible==2.8.3
-    #which ansible
-    #ansible --version
-    #echo "################After sudo pip#################"
-    echo "################Try to find ansible#################"
-    sudo find /home/vsts/.local/ | grep ansible
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
+    echo "##########Install requirements#########"
+    pip install -r requirements.txt
+    echo "##########After Install requirements#########"
     cd contrib/dind
     pip install -r requirements.txt
-    # Install ansible
-    pip install -r requirements.txt
-    #pip install ruamel.yaml
-    #pip3 install ruamel.yaml
     # Create the node containers
     ansible-playbook -i hosts dind-cluster.yaml
     cd ../../
@@ -44,7 +31,6 @@ steps:
     ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
     sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.ini /tmp/kubespray.dind.inventory_builder.sh
     cat ${INVENTORY_DIR}/hosts.ini
-    ##*ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    #sudo docker ps
-    #sudo docker exec kube-node1 kubectl get node
-    #sudo docker exec kube-node1 kubectl get pod --all-namespaces
+    ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.ini cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    sudo docker exec kube-node1 kubectl get node
+    sudo docker exec kube-node1 kubectl get pod --all-namespaces
