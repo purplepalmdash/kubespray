@@ -18,9 +18,10 @@
   when: ansible_os_family in ['CoreOS', 'Container Linux by CoreOS']
 
 - name: Docker | reload docker
-  service:
-    name: docker
-    state: restarted
+  command: uptime
+#  service:
+#    name: docker
+#    state: restarted
 
 - name: Docker | wait for docker
   command: "{{ docker_bin_dir }}/docker images"
