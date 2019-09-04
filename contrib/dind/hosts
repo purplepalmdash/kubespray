@@ -6,8 +6,8 @@ localhost ansible_connection=local
 
 [containers]
 kube-node1
-kube-node2
-kube-node3
+#kube-node2
+#kube-node3
 #kube-node4
 #kube-node5
 
