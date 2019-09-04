@@ -17,7 +17,8 @@ distro_settings:
     user: "ubuntu"
     pid1_exe: /lib/systemd/systemd
     init: |
-      /sbin/init
+      sh -c "apt-get -qy update && apt-get -qy install systemd-sysv dbus && exec /sbin/init"
+      #/sbin/init
     raw_setup: apt-get -qy update && apt-get -qy install dbus python sudo iproute2 iputils-ping
     raw_setup_done: test -x /usr/bin/sudo
     agetty_svc: getty@*
