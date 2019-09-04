@@ -18,7 +18,7 @@ distro_settings:
     pid1_exe: /lib/systemd/systemd
     init: |
       /sbin/init
-    raw_setup: apt-get -qy update && apt-get -qy install dbus python sudo iproute2
+    raw_setup: apt-get -qy update && apt-get -qy install dbus python sudo iproute2 iputils-ping
     raw_setup_done: test -x /usr/bin/sudo
     agetty_svc: getty@*
     ssh_service: ssh
