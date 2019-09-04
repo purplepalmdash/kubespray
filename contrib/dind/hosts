@@ -8,8 +8,8 @@ localhost ansible_connection=local
 kube-node1
 kube-node2
 kube-node3
-kube-node4
-kube-node5
+#kube-node4
+#kube-node5
 
 [containers:vars]
 ansible_connection=docker
