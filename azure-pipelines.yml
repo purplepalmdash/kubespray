@@ -8,35 +8,36 @@ pool:
 steps:
 - script: |
     free -m && df -h && cat /proc/cpuinfo
-    echo "##########################show dmesg ########################"
-    dmesg
-    echo "##########################END show dmesg ########################"
-    ps -ef | grep docker
-    sudo systemctl list-units | grep docker
-    sudo systemctl list-units>units
-    sudo cat units
-    sudo file /usr/bin/docker
-    echo "###################find usr docker ###################"
-    sudo find /usr | grep docker
-    echo "###################find etc docker ###################"
-    sudo find /etc | grep docker
-    which docker
-    docker version
-    sudo apt-get purge docker
-    which docker
-    sudo apt-get remove docker docker-engine docker.io containerd runc
-    sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo apt-key fingerprint 0EBFCD88
-    sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-    which docker
-    docker version
-    echo "##########Get docker version#########"
-    sudo docker version
-    sudo docker info
-    sudo dpkg -l | grep docker
+    sudo dpkg -l
+    #*echo "##########################show dmesg ########################"
+    #*dmesg
+    #*echo "##########################END show dmesg ########################"
+    #*ps -ef | grep docker
+    #*sudo systemctl list-units | grep docker
+    #*sudo systemctl list-units>units
+    #*sudo cat units
+    #*sudo file /usr/bin/docker
+    #*echo "###################find usr docker ###################"
+    #*sudo find /usr | grep docker
+    #*echo "###################find etc docker ###################"
+    #*sudo find /etc | grep docker
+    #*which docker
+    #*docker version
+    #*sudo apt-get purge docker
+    #*which docker
+    #*sudo apt-get remove docker docker-engine docker.io containerd runc
+    #*sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common
+    #*curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    #*sudo apt-key fingerprint 0EBFCD88
+    #*sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+    #*sudo apt-get update
+    #*sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    #*which docker
+    #*docker version
+    #*echo "##########Get docker version#########"
+    #*sudo docker version
+    #*sudo docker info
+    #*sudo dpkg -l | grep docker
     #*sudo apt-get purge ansible
     #*sudo apt-get update -y
     #*sudo apt-get install -y python-pip
