@@ -12,7 +12,7 @@ bootstrap_os: ubuntu
 docker_version: latest
 
 #docker_storage_options: -s overlay2 --storage-opt overlay2.override_kernel_check=true -g /dind/docker
-docker_storage_options: -g /dind/docker
+docker_storage_options: -s vfs -g /dind/docker
 
 dns_mode: coredns
 
