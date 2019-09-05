@@ -200,8 +200,8 @@ container_manager: docker
 
 ## Uncomment this if you want to force overlay/overlay2 as docker storage driver
 ## Please note that overlay2 is only supported on newer kernels
-#docker_storage_options: -s overlay2 --storage-opt overlay2.override_kernel_check=true -g /dind/docker
-docker_storage_options: -s overlay2 --storage-opt overlay2.override_kernel_check=false -g /dind/docker
+docker_storage_options: -s overlay2 --storage-opt overlay2.override_kernel_check=true -g /dind/docker
+#docker_storage_options: -s overlay2 --storage-opt overlay2.override_kernel_check=false -g /dind/docker
 
 ## Enable docker_container_storage_setup, it will configure devicemapper driver on Centos7 or RedHat7.
 docker_container_storage_setup: false
