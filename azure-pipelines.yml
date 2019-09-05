@@ -31,9 +31,9 @@ steps:
     sudo lsmod | grep aufs
     sudo df -h
     echo "######################show aufs #####################"
-    sudo /etc/init.d/lxc stop
-    sudo umount /sys/fs/cgroup/
-    sudo mount -t cgroup devices 1 /sys/fs/cgroup
+    #sudo /etc/init.d/lxc stop
+    #sudo umount /sys/fs/cgroup/
+    #sudo mount -t cgroup devices 1 /sys/fs/cgroup
     # If the unmount fails, you can find out the proper mount-point with:
     #
     echo "######################show cgroup #####################"
@@ -75,7 +75,7 @@ steps:
     ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
     sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
     cat ${INVENTORY_DIR}/hosts.yml
-    ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    #ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     sudo docker exec kube-node1 kubectl get node
     sudo docker exec kube-node1 kubectl get pod --all-namespaces
