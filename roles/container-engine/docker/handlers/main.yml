@@ -18,7 +18,7 @@
   when: ansible_os_family in ['CoreOS', 'Container Linux by CoreOS']
 
 - name: Docker | reload docker
-  command: uptime
+  command: sleep 3 && systemctl daemon-reload &&  systemctl start docker
   #service:
   #  name: docker
   #  state: restarted
