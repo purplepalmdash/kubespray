@@ -62,6 +62,7 @@ steps:
     ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
     sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
     cat ${INVENTORY_DIR}/hosts.yml
+    sudo docker exec kube-node1 apt-get install -y iputils-ping
     #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     sudo docker exec kube-node1 kubectl get node
