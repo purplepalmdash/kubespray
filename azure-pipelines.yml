@@ -67,6 +67,8 @@ steps:
     pip3 install ruamel.yaml
     # Create the node containers
     sudo /home/vsts/.local/bin/ansible-playbook -i hosts dind-cluster.yaml
+    sudo docker volume ls
+    sudo docker volume inspect kube-node1
     cd ../../
     INVENTORY_DIR=inventory/local-dind
     mkdir -p ${INVENTORY_DIR}
