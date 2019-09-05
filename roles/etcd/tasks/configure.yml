@@ -63,6 +63,9 @@
     enabled: yes
   when: is_etcd_master and etcd_events_cluster_setup
 
+- name: Configure | Check Check
+  shell: docker ps
+
 - name: Configure | Check if etcd cluster is healthy
   shell: "{{ bin_dir }}/etcdctl --no-sync --endpoints={{ etcd_client_url }} cluster-health | grep -q 'cluster is healthy'"
   register: etcd_cluster_is_healthy
