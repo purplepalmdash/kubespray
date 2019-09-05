@@ -29,8 +29,8 @@
     volumes:
       - /boot:/boot
       - /lib/modules:/lib/modules
-      - "{{ item }}:/dind/docker"
-      #- /home/vsts/kube-node1:/dind/docker
+      #- "{{ item }}:/dind/docker"
+      - /home/vsts/kube-node1:/dind/docker
   register: containers
   with_items: "{{ groups.containers }}"
   tags:
