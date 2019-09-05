@@ -7,7 +7,6 @@ pool:
 
 steps:
 - script: |
-    sudo lsmod | grep aufs
     free -m && df -h && cat /proc/cpuinfo
     sudo fdisk -l
     sudo mount
@@ -26,20 +25,6 @@ steps:
     sudo rm -f /etc/docker/daemon.json
     sudo apt-get remove docker docker-engine docker.io containerd runc
     sudo apt autoremove
-    sudo rmmod aufs
-    echo "######################show aufs #####################"
-    sudo lsmod | grep aufs
-    sudo df -h
-    echo "######################show aufs #####################"
-    #sudo /etc/init.d/lxc stop
-    #sudo umount /sys/fs/cgroup/
-    #sudo mount -t cgroup devices 1 /sys/fs/cgroup
-    # If the unmount fails, you can find out the proper mount-point with:
-    #
-    echo "######################show cgroup #####################"
-    sudo cat /proc/mounts | grep cgroup
-    sudo df -h
-    echo "######################show cgroup #####################"
     sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo apt-key fingerprint 0EBFCD88
