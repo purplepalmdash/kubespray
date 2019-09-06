@@ -80,5 +80,7 @@ steps:
     echo "####################################################3"
     sudo docker exec kube-node1 ps -ef
     echo "####################################################3"
+    sudo docker images
+    echo "####################################################3"
     sudo docker exec kube-node1 kubectl get node
     sudo docker exec kube-node1 kubectl get pod --all-namespaces
