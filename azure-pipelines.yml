@@ -7,85 +7,89 @@ pool:
 
 steps:
 - script: |
-    sudo docker ps
-    echo "#################################################"
-    sudo docker ps -a
-    echo "#################################################"
-    sudo docker info
-    echo "#################################################"
-    sudo modprobe -r overlay && sudo modprobe overlay redirect_dir=off && sudo systemctl restart docker
-    echo "#################################################"
-    sudo docker info
-    free -m && df -h && cat /proc/cpuinfo
-    sudo fdisk -l
-    sudo mount
-    sudo docker container stop $(sudo docker container ls -aq)
-    sudo docker container rm $(sudo docker container ls -aq)
-    sudo systemctl stop docker
-    sudo systemctl disable docker
-    sudo apt-get remove --purge moby-cli
-    sudo apt-get remove --purge moby-engine
-    sudo apt autoremove
-    sudo ls -l -h /var/lib/
-    sudo ls -l -h /var/lib/docker/
-    sudo cat /etc/docker/daemon.json
-    sudo cat /etc/systemd/system/multi-user.target.wants/docker.service
-    sudo rm -rf /var/lib/docker/
-    sudo rm -f /etc/docker/daemon.json
-    sudo apt-get remove docker docker-engine docker.io containerd runc
-    sudo apt autoremove
-    sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo apt-key fingerprint 0EBFCD88
-    sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-    which docker
-    docker version
-    sudo docker images
-    sudo docker info
-    sudo apt-get purge ansible
-    sudo apt-get update -y
-    sudo apt-get install -y python-pip
-    pip install wheel
-    pip install -r requirements.txt
-    export PATH=/home/vsts/.local/bin/:$PATH
-    which ansible
-    ansible --version
-    which ping
-    sudo apt-get install -y iputils-ping
-    which ping
+    sudo bash
+    whoami
+    echo $HOME
     ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
-    cd contrib/dind
-    pip install -r requirements.txt
-    pip3 install ruamel.yaml
-    # Create the node containers
-    sudo /home/vsts/.local/bin/ansible-playbook -i hosts dind-cluster.yaml
-    sudo docker volume ls
-    sudo docker volume inspect kube-node1
-    cd ../../
-    INVENTORY_DIR=inventory/local-dind
-    mkdir -p ${INVENTORY_DIR}
-    rm -f ${INVENTORY_DIR}/hosts.ini
-    cat /tmp/kubespray.dind.inventory_builder.sh
-    ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
-    sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
-    cat ${INVENTORY_DIR}/hosts.yml
-    sudo docker exec kube-node1 apt-get install -y iputils-ping
-    #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    echo "####################################################3"
-    sudo docker exec kube-node1 docker ps
-    echo "####################################################3"
-    sudo docker exec kube-node1 docker images
-    echo "####################################################3"
-    sudo docker exec kube-node1 docker ps -a
-    echo "####################################################3"
-    sudo docker exec kube-node1 systemctl status docker
-    echo "####################################################3"
-    sudo docker exec kube-node1 docker info
-    echo "####################################################3"
-    sudo docker exec kube-node1 ps -ef
-    echo "####################################################3"
-    sudo docker exec kube-node1 kubectl get node
-    sudo docker exec kube-node1 kubectl get pod --all-namespaces
+    #sudo docker ps
+    #echo "#################################################"
+    #sudo docker ps -a
+    #echo "#################################################"
+    #sudo docker info
+    #echo "#################################################"
+    #sudo modprobe -r overlay && sudo modprobe overlay redirect_dir=off && sudo systemctl restart docker
+    #echo "#################################################"
+    #sudo docker info
+    #free -m && df -h && cat /proc/cpuinfo
+    #sudo fdisk -l
+    #sudo mount
+    #sudo docker container stop $(sudo docker container ls -aq)
+    #sudo docker container rm $(sudo docker container ls -aq)
+    #sudo systemctl stop docker
+    #sudo systemctl disable docker
+    #sudo apt-get remove --purge moby-cli
+    #sudo apt-get remove --purge moby-engine
+    #sudo apt autoremove
+    #sudo ls -l -h /var/lib/
+    #sudo ls -l -h /var/lib/docker/
+    #sudo cat /etc/docker/daemon.json
+    #sudo cat /etc/systemd/system/multi-user.target.wants/docker.service
+    #sudo rm -rf /var/lib/docker/
+    #sudo rm -f /etc/docker/daemon.json
+    #sudo apt-get remove docker docker-engine docker.io containerd runc
+    #sudo apt autoremove
+    #sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common
+    #curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    #sudo apt-key fingerprint 0EBFCD88
+    #sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+    #sudo apt-get update
+    #sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    #which docker
+    #docker version
+    #sudo docker images
+    #sudo docker info
+    #sudo apt-get purge ansible
+    #sudo apt-get update -y
+    #sudo apt-get install -y python-pip
+    #pip install wheel
+    #pip install -r requirements.txt
+    #export PATH=/home/vsts/.local/bin/:$PATH
+    #which ansible
+    #ansible --version
+    #which ping
+    #sudo apt-get install -y iputils-ping
+    #which ping
+    #ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
+    #cd contrib/dind
+    #pip install -r requirements.txt
+    #pip3 install ruamel.yaml
+    ## Create the node containers
+    #sudo /home/vsts/.local/bin/ansible-playbook -i hosts dind-cluster.yaml
+    #sudo docker volume ls
+    #sudo docker volume inspect kube-node1
+    #cd ../../
+    #INVENTORY_DIR=inventory/local-dind
+    #mkdir -p ${INVENTORY_DIR}
+    #rm -f ${INVENTORY_DIR}/hosts.ini
+    #cat /tmp/kubespray.dind.inventory_builder.sh
+    #ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
+    #sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
+    #cat ${INVENTORY_DIR}/hosts.yml
+    #sudo docker exec kube-node1 apt-get install -y iputils-ping
+    ##ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    #ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 docker ps
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 docker images
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 docker ps -a
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 systemctl status docker
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 docker info
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 ps -ef
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 kubectl get node
+    #sudo docker exec kube-node1 kubectl get pod --all-namespaces
