@@ -42,7 +42,7 @@ steps:
     echo "####################################################3"
     sudo docker cp kube-node1:/root/combine.tar .
     ls -l -h combine.tar
-    sudo docker cp -r kube-node1:/root/debs .
+    sudo docker cp kube-node1:/root/debstar.tar.gz .
     du -hs debs
     tar czf k8s_debs.tar.gz debs
     ls -l -h k8s_debs.tar.gz

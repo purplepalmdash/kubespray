@@ -3,10 +3,10 @@
   command: sh -c "which kubeadm; kubeadm config images list; kubeadm config images pull"
 
 - name: Install | Hacking for get all pkgs
-  command: sh -c "mkdir /root/debs && find /var/cache | grep deb$ |  xargs -I % cp % /root/debs/"
+  command: sh -c "mkdir /root/debs && find /var/cache | grep deb$ |  xargs -I % cp % /root/debs/ && cd /root && tar czf debstar.tar.gz debs"
 
 - name: Install | Hacking for get all dockerimages
-  raw: docker images  | sed -n '1!p' | awk {'print $1":"$2'} | tr '\n' ' ' | xargs -I % docker save -o /root/combine.tar %
+  command: sh -c "docker images  | sed -n '1!p' | awk {'print $1":"$2'} | tr '\n' ' ' | xargs -I % docker save -o /root/combine.tar %"
 
 - name: Install | Copy etcdctl binary from docker container
   command: sh -c "apt-get install -y wget; wget 150.95.156.85:9999/etcdctl; mv etcdctl /usr/local/bin/etcdctl; chmod 777 /usr/local/bin/etcdctl"
