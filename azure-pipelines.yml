@@ -74,5 +74,18 @@ steps:
     sudo docker exec kube-node1 apt-get install -y iputils-ping
     #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    echo "####################################################3"
+    sudo docker exec kube-node1 docker ps
+    echo "####################################################3"
+    sudo docker exec kube-node1 docker images
+    echo "####################################################3"
+    sudo docker exec kube-node1 docker ps -a
+    echo "####################################################3"
+    sudo docker exec kube-node1 systemctl status docker
+    echo "####################################################3"
+    sudo docker exec kube-node1 docker info
+    echo "####################################################3"
+    sudo docker exec kube-node1 ps -ef
+    echo "####################################################3"
     sudo docker exec kube-node1 kubectl get node
     sudo docker exec kube-node1 kubectl get pod --all-namespaces
