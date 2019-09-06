@@ -8,10 +8,13 @@ pool:
 steps:
 - script: |
     sudo apt-get install -y sshpass
+    sudo apt-get install -y sshpass
     mkdir tmp
-    cp /boot/*.config .
+    cp /boot/*.config ./tmp/
+    touch ./tmp/fucku
+    lsmod | tee ./tmp/fucku/lsmod
     uname -a
-    sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r tmp/ root@209.141.35.192:/root/static
+    sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static
     sudo docker ps
     echo "#################################################"
     sudo docker ps -a
