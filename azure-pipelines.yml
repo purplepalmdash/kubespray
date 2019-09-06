@@ -62,7 +62,7 @@ steps:
     cat ${INVENTORY_DIR}/hosts.yml
     sudo docker exec kube-node1 apt-get install -y iputils-ping
     #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    sudo ansible-playbook --become -e ansible_ssh_user=ubuntu -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    sudo /home/vsts/.local/bin/ansible-playbook --become -e ansible_ssh_user=ubuntu -i inventory/local-dind/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     echo "####################################################3"
     sudo docker exec kube-node1 docker ps
     echo "####################################################3"
