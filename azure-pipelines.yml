@@ -17,6 +17,12 @@ steps:
     sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static/tmp1
     sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/tmp1
     sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/
+    echo $VPSPASSWORD
+    echo 1
+    echo $vpspassword
+    echo 2
+    echo $(vpspassword)
+    echo 3
     #**#sudo docker ps
     #**#echo "#################################################"
     #**#sudo docker ps -a
