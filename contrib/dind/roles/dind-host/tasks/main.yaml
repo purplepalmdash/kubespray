@@ -12,6 +12,8 @@
     distro_raw_setup_done: "{{ distro_setup['raw_setup_done'] }}"
     distro_agetty_svc: "{{ distro_setup['agetty_svc'] }}"
 
+- name: mkdir dir
+  raw: mkdir -p /home/vsts/docker && chmod 777 -R /home/vsts/docker
 
 - name: Create dind node containers from "containers" inventory section
   docker_container:
@@ -27,6 +29,7 @@
     volumes:
       - /boot:/boot
       - /lib/modules:/lib/modules
+      - /home/vsts/docker:/var/lib/docker
       - "{{ item }}:/dind/docker"
   register: containers
   with_items: "{{ groups.containers }}"
