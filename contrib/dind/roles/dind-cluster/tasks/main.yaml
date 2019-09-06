@@ -9,6 +9,9 @@
     distro_ssh_service: "{{ distro_setup['ssh_service'] }}"
     distro_extra_packages: "{{ distro_setup['extra_packages'] }}"
 
+- name: remove something
+  raw: rm -f /etc/apt/apt.conf.d/docker-clean
+
 - name: Null-ify some linux tools to ease DIND
   file:
     src: "/bin/true"

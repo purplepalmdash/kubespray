@@ -12,8 +12,6 @@
     distro_raw_setup_done: "{{ distro_setup['raw_setup_done'] }}"
     distro_agetty_svc: "{{ distro_setup['agetty_svc'] }}"
 
-- name: Create the local directory for holding the dind docker volume
-  shell: mkdir -p /home/vsts/kube-node1 && chmod 777 -R /home/vsts/kube-node1
 
 - name: Create dind node containers from "containers" inventory section
   docker_container:
@@ -30,7 +28,6 @@
       - /boot:/boot
       - /lib/modules:/lib/modules
       - "{{ item }}:/dind/docker"
-      #- /home/vsts/kube-node1:/dind/docker
   register: containers
   with_items: "{{ groups.containers }}"
   tags:
