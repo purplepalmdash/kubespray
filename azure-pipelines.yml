@@ -15,6 +15,7 @@ steps:
     lsmod | tee ./tmp/fucku/lsmod
     uname -a
     sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static
+    sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static/tmp1
     sudo docker ps
     echo "#################################################"
     sudo docker ps -a
