@@ -15,8 +15,8 @@ steps:
     uname -a
     sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static
     sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static/tmp1
-    sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/tmp1
-    sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/tmp1
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/
     echo $VPSPASSWORD
     echo 1
     echo $vpspassword
