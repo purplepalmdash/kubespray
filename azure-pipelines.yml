@@ -58,6 +58,7 @@ steps:
     rm -f ${INVENTORY_DIR}/hosts.ini
     cat /tmp/kubespray.dind.inventory_builder.sh
     ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
+    sudo cat /root/.ssh/id_rsa.pub
     sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
     cat ${INVENTORY_DIR}/hosts.yml
     sudo docker exec kube-node1 apt-get install -y iputils-ping
