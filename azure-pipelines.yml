@@ -7,95 +7,49 @@ pool:
 
 steps:
 - script: |
-    sudo apt-get install -y sshpass
     mkdir tmp
     cp /boot/*.config ./tmp/
-    touch ./tmp/fucku
     lsmod | tee ./tmp/lsmod
-    uname -a
-    sshpass -p $vpspassword scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static
-    sshpass -p $VPSPASSWORD scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static/tmp1
-    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/tmp1
-    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ./tmp/lsmod root@209.141.35.192:/root/static/
-    echo $VPSPASSWORD
-    echo 1
-    echo $vpspassword
-    echo 2
-    echo $(vpspassword)
-    echo 3
-    #**#sudo docker ps
-    #**#echo "#################################################"
-    #**#sudo docker ps -a
-    #**#echo "#################################################"
-    #**#sudo docker info
-    #**#echo "#################################################"
-    #**#sudo modprobe -r overlay && sudo modprobe overlay redirect_dir=off && sudo systemctl restart docker
-    #**#echo "#################################################"
-    #**#sudo docker info
-    #**#free -m && df -h && cat /proc/cpuinfo
-    #**#sudo fdisk -l
-    #**#sudo mount
-    #**#sudo docker container stop $(sudo docker container ls -aq)
-    #**#sudo docker container rm $(sudo docker container ls -aq)
-    #**#sudo systemctl stop docker
-    #**#sudo systemctl disable docker
-    #**#sudo apt-get remove --purge moby-cli apparmor
-    #**#sudo apt-get remove --purge moby-engine
-    #**#sudo ufw disable
-    #**#sudo apt autoremove
-    #**#sudo ls -l -h /var/lib/
-    #**#sudo ls -l -h /var/lib/docker/
-    #**#sudo cat /etc/docker/daemon.json
-    #**#sudo cat /etc/systemd/system/multi-user.target.wants/docker.service
-    #**#sudo rm -rf /var/lib/docker/
-    #**#sudo rm -f /etc/docker/daemon.json
-    #**#sudo apt-get remove docker docker-engine docker.io containerd runc
-    #**#sudo apt autoremove
-    #**#sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common sshpass
-    #**#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    #**#sudo apt-key fingerprint 0EBFCD88
-    #**#sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
-    #**#sudo apt-get update
-    #**#sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-    #**sudo apt-get purge ansible
-    #**sudo apt-get update -y
-    #**sudo apt-get install -y python-pip
-    #**pip install wheel
-    #**pip install -r requirements.txt
-    #**export PATH=/home/vsts/.local/bin/:$PATH
-    #**sudo mkdir -p /root/.ssh
-    #**ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
-    #**sudo ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
-    #**cd contrib/dind
-    #**pip install -r requirements.txt
-    #**pip3 install ruamel.yaml
-    #**# Create the node containers
-    #**sudo /home/vsts/.local/bin/ansible-playbook -i hosts dind-cluster.yaml
-    #**cd ../../
-    #**INVENTORY_DIR=inventory/local-dind
-    #**mkdir -p ${INVENTORY_DIR}
-    #**rm -f ${INVENTORY_DIR}/hosts.ini
-    #**cat /tmp/kubespray.dind.inventory_builder.sh
-    #**ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
-    #**sudo ls /root/.ssh/
-    #**sudo cat /root/.ssh/id_rsa.pub
-    #**sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
-    #**cat ${INVENTORY_DIR}/hosts.yml
-    #**sudo docker exec kube-node1 apt-get install -y iputils-ping
-    #**#ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    #**sudo /home/vsts/.local/bin/ansible-playbook --become -e ansible_ssh_user=ubuntu -i inventory/local-dind/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml -vvvv
-    #**echo "####################################################3"
-    #**sudo docker exec kube-node1 docker ps
-    #**echo "####################################################3"
-    #**sudo docker exec kube-node1 docker images
-    #**echo "####################################################3"
-    #**sudo docker exec kube-node1 docker ps -a
-    #**echo "####################################################3"
-    #**sudo docker exec kube-node1 systemctl status docker
-    #**echo "####################################################3"
-    #**sudo docker exec kube-node1 docker info
-    #**echo "####################################################3"
-    #**sudo docker exec kube-node1 ps -ef
-    #**echo "####################################################3"
-    #**sudo docker exec kube-node1 find /var/cache | grep deb$
-    #**echo "####################################################3"
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./tmp/ root@209.141.35.192:/root/static
+    sudo apt-get purge ansible
+    sudo apt-get update -y
+    sudo apt-get install -y python-pip
+    pip install wheel
+    pip install -r requirements.txt
+    export PATH=/home/vsts/.local/bin/:$PATH
+    sudo mkdir -p /root/.ssh
+    ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
+    sudo ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
+    cd contrib/dind
+    pip install -r requirements.txt
+    pip3 install ruamel.yaml
+    # Create the node containers
+    sudo /home/vsts/.local/bin/ansible-playbook -i hosts dind-cluster.yaml
+    cd ../../
+    INVENTORY_DIR=inventory/local-dind
+    mkdir -p ${INVENTORY_DIR}
+    rm -f ${INVENTORY_DIR}/hosts.ini
+    cat /tmp/kubespray.dind.inventory_builder.sh
+    ls -l -h  /tmp/kubespray.dind.inventory_builder.sh
+    sudo ls /root/.ssh/
+    sudo cat /root/.ssh/id_rsa.pub
+    sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
+    cat ${INVENTORY_DIR}/hosts.yml
+    sudo docker exec kube-node1 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp
+    #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    sudo /home/vsts/.local/bin/ansible-playbook --become -e ansible_ssh_user=ubuntu -i inventory/local-dind/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml 
+    sudo docker exec kube-node1 docker images
+    echo "####################################################3"
+    sudo docker exec kube-node1 mkdir /root/debs && find /var/cache | grep deb$ |  xargs -I % cp % /root/debs/
+    echo "####################################################3"
+    docker exec kube-node1  docker images  | sed -n '1!p' | awk {'print $1":"$2'} | tr '\n' ' ' | xargs -I % docker save -o /root/combine.tar %
+    docker cp kube-node1:/root/combine.tar .
+    ls -l -h combine.tar
+    docker cp -r kube-node1:/root/debs .
+    du -hs debs
+    tar czf k8s_debs.tar.gz debs
+    ls -l -h k8s_debs.tar.gz
+    #### combine.tar and k8s_debs.tar.gz should be uploaded to remote machine
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./combine.tar root@209.141.35.192:/root/static
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./k8s_debs.tar.gz root@209.141.35.192:/root/static
+    echo "######################## really done #####################"
