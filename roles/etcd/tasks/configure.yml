@@ -70,7 +70,7 @@
   shell: "{{ bin_dir }}/etcdctl --no-sync --endpoints={{ etcd_client_url }} cluster-health | grep -q 'cluster is healthy'"
   register: etcd_cluster_is_healthy
   until: etcd_cluster_is_healthy.rc == 0
-  retries: 10
+  retries: 2
   delay: "{{ retry_stagger | random + 3 }}"
   ignore_errors: false
   changed_when: false
