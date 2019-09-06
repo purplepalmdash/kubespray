@@ -39,6 +39,7 @@ steps:
     #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     sudo /home/vsts/.local/bin/ansible-playbook --become -e ansible_ssh_user=ubuntu -i inventory/local-dind/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml 
     sudo docker exec kube-node1 docker images
+    sudo docker exec kube-node1  ls /root/ -l -h
     echo "####################################################3"
     sudo docker cp kube-node1:/root/combine.tar .
     ls -l -h combine.tar
