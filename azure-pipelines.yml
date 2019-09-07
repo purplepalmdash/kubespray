@@ -44,12 +44,14 @@ steps:
     echo "####################################################3"
     sudo docker exec kube-node1  ls /root/ -l -h
     echo "####################################################3"
-    sudo docker cp kube-node1:/root/combine.tar .
-    ls -l -h combine.tar
+    #sudo docker cp kube-node1:/root/combine.tar .
+    #ls -l -h combine.tar
+    ls -l -h /home/vsts/docker/
+    sudo chmod 777 /home/vsts/docker/combine.tar
     sudo docker cp kube-node1:/root/debstar.tar.gz .
     sudo chmod 777 combine.tar debstar.tar.gz
     #### combine.tar and k8s_debs.tar.gz should be uploaded to remote machine
-    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./combine.tar root@209.141.35.192:/root/static
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /home/vsts/docker/combine.tar root@209.141.35.192:/root/static
     sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./debstar.tar.gz root@209.141.35.192:/root/static
     echo "######################## really done #####################"
     sudo docker exec kube-node1 kubectl get nodes
