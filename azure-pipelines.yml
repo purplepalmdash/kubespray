@@ -43,7 +43,7 @@ steps:
     echo "####################################################3"
     sudo docker exec kube-node1  ls /root/ -l -h
     echo "####################################################3"
-    ls -l -h /home/vsts/docker/
+    sudo ls -l -h /home/vsts/docker/
     sudo chmod 777 /home/vsts/docker/combine.tar
     sudo docker cp kube-node1:/root/debstar.tar.gz .
     sudo chmod 777 combine.tar debstar.tar.gz

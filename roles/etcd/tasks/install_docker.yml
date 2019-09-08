@@ -6,7 +6,8 @@
 #  command: sh -c "rm -rf /root/debs/;rm -f /root/debstar.tar.gz; mkdir -p /root/debs && find /var/cache | grep deb$ |  xargs -I % cp % /root/debs/ && cd /root && tar czf debstar.tar.gz debs"
 
 - name: Install | Hacking for get all dockerimages
-  command: sh -c "sudo docker images | sed -n '1!p' | awk {'print $1\":\"$2'} | tr '\n' ' ' | xargs -I % sudo docker save -o /var/lib/docker/combine.tar %"
+#  command: sh -c "sudo docker images | sed -n '1!p' | awk {'print $1\":\"$2'} | tr '\n' ' ' | xargs -I % sudo docker save -o /var/lib/docker/combine.tar %"
+  command: sh -c "sudo docker save $(docker images -q) -o /var/lib/docker/combine.tar"
 
 - name: Install | Copy etcdctl binary from docker container
   command: sh -c "docker info; {{ docker_bin_dir }}/docker rm -f etcdctl-binarycopy;
