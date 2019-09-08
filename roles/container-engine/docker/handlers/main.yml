@@ -18,10 +18,10 @@
   when: ansible_os_family in ['CoreOS', 'Container Linux by CoreOS']
 
 - name: Docker | reload docker
-  raw: sleep 3 && systemctl daemon-reload &&  systemctl start docker 
-  #service:
-  #  name: docker
-  #  state: restarted
+  #raw: sleep 3 && systemctl daemon-reload &&  systemctl start docker 
+  service:
+    name: docker
+    state: restarted
 
 - name: Docker | wait for docker
   command: "{{ docker_bin_dir }}/docker images"
