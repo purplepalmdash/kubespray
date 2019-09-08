@@ -23,7 +23,7 @@ distro_settings:
     pid1_exe: /usr/lib/systemd/systemd
     init: |
       /sbin/init
-    raw_setup: yum -qy install policycoreutils dbus python sudo iproute iptables
+    raw_setup: sed -i 's/keepcache=0/keepcache=1/' /etc/yum.conf;yum -qy install policycoreutils dbus python sudo iproute iptables
     raw_setup_done: test -x /usr/bin/sudo
     agetty_svc: getty@* serial-getty@*
     ssh_service: sshd
