@@ -14,7 +14,7 @@ distro_settings:
   ubuntu:
     <<: *DEBIAN
     #image: "ubuntu:xenial-20190720"
-    image: "feipyang/rong:1604"
+    image: "feipyang/rong:1804"
     user: "ubuntu"
     init: |
       /sbin/init
