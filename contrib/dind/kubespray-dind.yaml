@@ -7,7 +7,7 @@ kubelet_fail_swap_on: false
 
 # Docker nodes need to have been created with same "node_distro: debian"
 # at contrib/dind/group_vars/all/all.yaml
-bootstrap_os: centos
+bootstrap_os: ubuntu
 
 docker_version: latest
 

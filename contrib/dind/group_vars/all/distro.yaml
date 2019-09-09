@@ -13,7 +13,8 @@ distro_settings:
     extra_packages: []
   ubuntu:
     <<: *DEBIAN
-    image: "ubuntu:xenial-20190720"
+    #image: "ubuntu:xenial-20190720"
+    image: "feipyang/rong:1604"
     user: "ubuntu"
     init: |
       /sbin/init
