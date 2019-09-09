@@ -73,7 +73,7 @@
 - name: Create distro user "{{ distro_user }}"
   user:
     name: "{{ distro_user }}"
-    uid: 1000
+    uid: 1001
     # groups: sudo
     append: yes
 
