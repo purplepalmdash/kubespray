@@ -115,5 +115,6 @@
     - { role: kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }
 
 - hosts: kube-master
-  #command: sh -c "sudo docker images | sed -n '1!p' | awk {'print $1\":\"$2'} | tr '\n' ' ' | xargs -I % sudo docker save -o /var/lib/docker/combine.tar %"
-  command: sh -c "sudo docker save $(docker images -q) -o /var/lib/docker/combine.tar"
+  tasks:
+    - name: "Save all docker images"
+      command: sh -c "sudo docker save $(docker images -q) -o /var/lib/docker/combine.tar"
