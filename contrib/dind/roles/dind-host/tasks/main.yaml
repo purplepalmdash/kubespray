@@ -64,7 +64,7 @@
 
 - name: Remove gettys from node containers
   raw: |
-    until test -S /var/run/dbus/system_bus_socket; do sleep 1; done
+    #until test -S /var/run/dbus/system_bus_socket; do sleep 1; done
     systemctl disable {{ distro_agetty_svc }}
     systemctl stop {{ distro_agetty_svc }}
   delegate_to: "{{ item._ansible_item_label|default(item.item) }}"
