@@ -42,7 +42,7 @@ import re
 import sys
 
 ROLES = ['all', 'kube-master', 'kube-node', 'etcd', 'k8s-cluster',
-         'calico-rr']
+         'calico-rr', 'kube-deploy']
 PROTECTED_NAMES = ROLES
 AVAILABLE_COMMANDS = ['help', 'print_cfg', 'print_ips', 'print_hostnames', 'load']
 _boolean_states = {'1': True, 'yes': True, 'true': True, 'on': True,
@@ -60,6 +60,7 @@ def get_var_as_bool(name, default):
 
 CONFIG_FILE = os.environ.get("CONFIG_FILE", "./inventory/sample/hosts.yaml")
 KUBE_MASTERS = int(os.environ.get("KUBE_MASTERS_MASTERS", 2))
+KUBE_DEPLOY = int(1)
 # Reconfigures cluster distribution at scale
 SCALE_THRESHOLD = int(os.environ.get("SCALE_THRESHOLD", 50))
 MASSIVE_SCALE_THRESHOLD = int(os.environ.get("SCALE_THRESHOLD", 200))
@@ -101,6 +102,7 @@ class KubesprayInventory(object):
                     etcd_hosts_count:(etcd_hosts_count + KUBE_MASTERS)])
             else:
                 self.set_kube_master(list(self.hosts.keys())[:KUBE_MASTERS])
+                self.set_kube_deploy(list(self.hosts.keys())[:KUBE_DEPLOY])
             self.set_kube_node(self.hosts.keys())
             if len(self.hosts) >= SCALE_THRESHOLD:
                 self.set_calico_rr(list(self.hosts.keys())[:etcd_hosts_count])
@@ -268,6 +270,10 @@ class KubesprayInventory(object):
                     host: None}
             else:
                 self.yaml_config['all']['children'][group]['hosts'][host] = None  # noqa
+
+    def set_kube_deploy(self, hosts):
+        for host in hosts:
+            self.add_host_to_group('kube-deploy', host)
 
     def set_kube_master(self, hosts):
         for host in hosts:
