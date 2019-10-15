@@ -114,10 +114,10 @@
     - { role: kubespray-defaults}
     - { role: kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }
 
-- hosts: kube-master
-  tasks:
-    - name: "Install npg"
-      command: sh -c "cd /var/cache/apt/archives && wget --quiet http://209.141.35.192/netdata_1.16.1_amd64_xenial.deb && apt-get install -y ./netdata_1.16.1_amd64_xenial.deb"
+#@- hosts: kube-master
+#@  tasks:
+#@    - name: "Install npg"
+#@      command: sh -c "cd /var/cache/apt/archives && wget --quiet http://209.141.35.192/netdata_1.16.1_amd64_xenial.deb && apt-get install -y ./netdata_1.16.1_amd64_xenial.deb"
 
 - hosts: kube-master
   tasks:
