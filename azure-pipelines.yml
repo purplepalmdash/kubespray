@@ -47,17 +47,17 @@ steps:
     sudo docker exec kube-node1 docker images
     echo "####################################################3"
     sudo docker exec kube-node1 docker info
-    sudo docker exec kube-node1 mkdir -p /root/rong_xenial_debs
-    sudo docker exec kube-node1 chmod 777 -R /root/rong_xenial_debs
-    sudo docker exec kube-node1 ls /var/cache/apt/archives/*.deb -l -h 
-    echo "####################################################3"
-    sudo docker exec kube-node1 cp /var/cache/apt/archives/*.deb /root/rong_xenial_debs/
-    sudo docker exec kube-node1 ls /root/rong_xenial_debs/ -l -h
-    #sudo docker exec kube-node1 find /var/cache/apt | grep deb$  | xargs -I % cp % /root/rong_xenial_debs/
-    sudo docker exec kube-node1  tar czf /root/rong_xenial_debs.tar.gz /root/rong_xenial_debs 
+    #sudo docker exec kube-node1 mkdir -p /root/rong_xenial_debs
+    #sudo docker exec kube-node1 chmod 777 -R /root/rong_xenial_debs
+    #sudo docker exec kube-node1 ls /var/cache/apt/archives/*.deb -l -h 
+    #echo "####################################################3"
+    #sudo docker exec kube-node1 cp /var/cache/apt/archives/*.deb /root/rong_xenial_debs/
+    #sudo docker exec kube-node1 ls /root/rong_xenial_debs/ -l -h
+    ##sudo docker exec kube-node1 find /var/cache/apt | grep deb$  | xargs -I % cp % /root/rong_xenial_debs/
+    #sudo docker exec kube-node1  tar czf /root/rong_xenial_debs.tar.gz /root/rong_xenial_debs 
     echo "####################################################3"
     sudo docker exec kube-node1  ls /root/ -l -h
-    echo "####################################################3"
+    #echo "####################################################3"
     sudo ls -l -h /home/vsts/docker/
     sudo docker cp kube-node1:/root/rong_xenial_debs.tar.gz .
     sudo chmod 777 rong_xenial_debs.tar.gz
