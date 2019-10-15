@@ -34,7 +34,7 @@ steps:
     sudo docker exec kube-node1 mkdir -p /etc/nginx_loadbalance
     sudo docker exec kube-node1 apt-get update -y
     sudo docker exec kube-node1 cat /etc/apt/sources.list
-    sudo docker exec kube-node1 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp tcpdump iotop unzip wget apt-transport-https socat rpcbind arping fping python-apt ipset ipvsadm pigz
+    sudo docker exec kube-node1 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp tcpdump iotop unzip wget apt-transport-https socat rpcbind arping fping python-apt ipset ipvsadm pigz nginx
     sudo docker exec kube-node1 add-apt-repository ppa:ansible/ansible-2.7 -y
     sudo docker exec kube-node1 apt-get update -y
     sudo docker exec kube-node1 apt-get install -y ansible
