@@ -60,6 +60,7 @@ steps:
     sudo docker stop kube-node1 && sudo docker rm kube-node1
     echo "######################## Start bionic building #####################"
     sudo sed -i 's/1604/1804/g' ./contrib/dind/group_vars/all/distro.yaml
+    sudo sed -i 's/xenial/bionic/g' ./contrib/dind/roles/dind-cluster/tasks/main.yaml
     rm -f ${INVENTORY_DIR}/hosts.ini
     cd contrib/dind
     sudo /home/vsts/.local/bin/ansible-playbook -i hosts dind-cluster.yaml
