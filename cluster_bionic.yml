@@ -124,6 +124,7 @@
 #    - name: "Install npg"
 #      command: sh -c "cd /var/cache/apt/archives && wget --quiet http://209.141.35.192/netdata_1.16.1_amd64.deb &&  DEBIAN_FRONTEND=noninteractive apt-get install -y ./netdata_1.16.1_amd64.deb"
 #
+
 - hosts: kube-master
   tasks:
     - name: "Save all os debs"
