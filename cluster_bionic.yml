@@ -117,13 +117,7 @@
 - hosts: kube-master
   tasks:
     - name: "Configure libssl"
-      command: sh -c "echo 'libssl1.1 libraries/restart-without-asking boolean true' | debconf-set-selections"
-
-- hosts: kube-master
-  tasks:
-    - name: "Configure libssl more"
-      command: sh -c "echo '* libraries/restart-without-asking boolean true' | debconf-set-selections'
-
+      command: sh -c "export DEBIAN_FRONTEND=noninteractive; apt-get install -y libssl1.1"
 
 - hosts: kube-master
   tasks:
