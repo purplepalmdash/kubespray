@@ -38,33 +38,49 @@ steps:
     sudo docker exec kube-node1 add-apt-repository ppa:ansible/ansible-2.7 -y
     sudo docker exec kube-node1 apt-get update -y
     sudo docker exec kube-node1 apt-get install -y ansible
-    sudo docker exec kube-node1 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp tcpdump iotop unzip wget apt-transport-https socat rpcbind arping fping python-apt ipset ipvsadm pigz
     #sudo docker exec kube-node2 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp
     #sudo docker exec kube-node3 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp
-    #ansible-playbook --become -e ansible_ssh_user=debian -i ${INVENTORY_DIR}/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
-    #sudo /home/vsts/.local/bin/ansible-playbook --become -e ansible_ssh_user=ubuntu -i inventory/local-dind/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml 
-    sudo sleep 10
     sudo /home/vsts/.local/bin/ansible-playbook --become -e ansible_ssh_user=ubuntu -i inventory/local-dind/hosts.yml cluster.yml --extra-vars @contrib/dind/kubespray-dind.yaml
     sudo docker exec kube-node1 docker images
     echo "####################################################3"
     sudo docker exec kube-node1 docker info
-    #sudo docker exec kube-node1 mkdir -p /root/rong_xenial_debs
-    #sudo docker exec kube-node1 chmod 777 -R /root/rong_xenial_debs
-    #sudo docker exec kube-node1 ls /var/cache/apt/archives/*.deb -l -h 
-    #echo "####################################################3"
-    #sudo docker exec kube-node1 cp /var/cache/apt/archives/*.deb /root/rong_xenial_debs/
-    #sudo docker exec kube-node1 ls /root/rong_xenial_debs/ -l -h
-    ##sudo docker exec kube-node1 find /var/cache/apt | grep deb$  | xargs -I % cp % /root/rong_xenial_debs/
-    #sudo docker exec kube-node1  tar czf /root/rong_xenial_debs.tar.gz /root/rong_xenial_debs 
     echo "####################################################3"
     sudo docker exec kube-node1  ls /root/ -l -h
     #echo "####################################################3"
     sudo ls -l -h /home/vsts/docker/
     sudo docker cp kube-node1:/root/rong_xenial_debs.tar.gz .
+    #sudo docker cp kube-node1:/root/combine .
     sudo chmod 777 rong_xenial_debs.tar.gz
     #### combine.tar and k8s_debs.tar.gz should be uploaded to remote machine
-    #sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /home/vsts/docker/combine.tar root@209.141.35.192:/root/static
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /home/vsts/docker/combine.tar root@209.141.35.192:/root/static
     sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./rong_xenial_debs.tar.gz root@209.141.35.192:/root/static
+    echo "######################## really done #####################"
+    sudo docker exec kube-node1 kubectl get nodes
+    sudo docker exec kube-node1 kubectl get pods --all-namespaces
+    sudo docker stop kube-node1 && sudo docker rm kube-node1
+    echo "######################## Start bionic building #####################"
+    sudo sed -i 's/1604/1804/g' ./contrib/dind/group_vars/all/distro.yaml
+    rm -f ${INVENTORY_DIR}/hosts.ini
+    cd contrib/dind
+    sudo /home/vsts/.local/bin/ansible-playbook -i hosts dind-cluster.yaml
+    cd ../../
+    sudo CONFIG_FILE=${INVENTORY_DIR}/hosts.yml /tmp/kubespray.dind.inventory_builder.sh
+    cat ${INVENTORY_DIR}/hosts.yml
+    sudo docker exec kube-node1 mkdir -p /etc/nginx_loadbalance
+    sudo docker exec kube-node1 apt-get update -y
+    sudo docker exec kube-node1 cat /etc/apt/sources.list
+    sudo docker exec kube-node1 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp tcpdump iotop unzip wget apt-transport-https socat rpcbind arping fping python-apt ipset ipvsadm pigz nginx docker-registry
+    sudo docker exec kube-node1 add-apt-repository ppa:ansible/ansible-2.7 -y
+    sudo docker exec kube-node1 apt-get update -y
+    sudo docker exec kube-node1 apt-get install -y ansible
+    sudo /home/vsts/.local/bin/ansible-playbook --become -e ansible_ssh_user=ubuntu -i inventory/local-dind/hosts.yml cluster_bionic.yml --extra-vars @contrib/dind/kubespray-dind.yaml
+    sudo docker exec kube-node1 docker images
+    sudo docker exec kube-node1 docker info
+    sudo ls -l -h /home/vsts/docker/
+    sudo docker cp kube-node1:/root/rong_bionic_debs.tar.gz .
+    sudo chmod 777 rong_bionic_debs.tar.gz
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /home/vsts/docker/combine_bionic.tar root@209.141.35.192:/root/static
+    sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./rong_bionic_debs.tar.gz root@209.141.35.192:/root/static
     echo "######################## really done #####################"
     sudo docker exec kube-node1 kubectl get nodes
     sudo docker exec kube-node1 kubectl get pods --all-namespaces

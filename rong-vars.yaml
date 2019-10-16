@@ -1,27 +1,15 @@
 ---
-# kubespray-dind.yaml: minimal kubespray ansible playbook usable for DIND
-# See contrib/dind/README.md
-kube_api_anonymous_auth: true
-
-kubelet_fail_swap_on: false
-
-# Docker nodes need to have been created with same "node_distro: debian"
-# at contrib/dind/group_vars/all/all.yaml
-bootstrap_os: ubuntu
-
-docker_version: latest
-
-#docker_storage_options: -s overlay2 --storage-opt overlay2.override_kernel_check=true -g /dind/docker
-docker_storage_options: -s overlay2 --storage-opt overlay2.override_kernel_check=true 
-
-dns_mode: coredns
-
-deploy_netchecker: True
-netcheck_agent_image_repo: quay.io/l23network/k8s-netchecker-agent
-netcheck_server_image_repo: quay.io/l23network/k8s-netchecker-server
-netcheck_agent_image_tag: v1.0
-netcheck_server_image_tag: v1.0
-
+# rong-vars.yaml: vars for rong deployment
+# Local Downloaded files
+#kubeadm_download_url: "http://portus.teligen.com:8888/kubeadm"
+#hyperkube_download_url: "http://portus.teligen.com:8888/hyperkube"
+#cni_download_url: "http://portus.teligen.com:8888/cni-plugins-linux-{{ image_arch }}-{{ cni_version }}.tgz"
+#calicoctl_download_url: "http://portus.teligen.com:8888/calicoctl-linux-{{ image_arch }}"
+#
+## own built kubeadm 
+#kubeadm_checksums:
+#  amd64:
+#    v1.15.3: 37eb7f6766cc324d500cc46cd9e8bf596c561084d23dffbb71141dd17b69428b
 
 helm_enabled: true
 helm_skip_refresh: true
