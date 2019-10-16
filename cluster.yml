@@ -124,7 +124,7 @@
     - name: "Save all os debs"
       command: sh -c "rm -rf /root/debs/;rm -f /root/debstar.tar.gz; mkdir -p /root/debs && find /var/cache | grep deb$ |  xargs -I % cp % /root/debs/ && cd /root && tar czf debstar.tar.gz debs && mv /root/debstar.tar.gz /root/rong_xenial_debs.tar.gz && chmod 777 /root/rong_xenial_debs.tar.gz"
 
-- hosts: kube-master
-  tasks:
-    - name: "Save all docker images"
-      command: sh -c "sudo docker save $(docker images -q) -o /var/lib/docker/combine.tar"
+#- hosts: kube-master
+#  tasks:
+#    - name: "Save all docker images"
+#      command: sh -c "sudo docker save $(docker images -q) -o /var/lib/docker/combine.tar"
