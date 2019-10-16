@@ -114,16 +114,21 @@
     - { role: kubespray-defaults}
     - { role: kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }
       
-#- hosts: kube-master
-#  tasks:
-#    - name: "Configure libssl"
-#      command: sh -c "export DEBIAN_FRONTEND=noninteractive; apt-get install -y libssl1.1"
-#
-#- hosts: kube-master
-#  tasks:
-#    - name: "Install npg"
-#      command: sh -c "cd /var/cache/apt/archives && wget --quiet http://209.141.35.192/netdata_1.16.1_amd64.deb &&  DEBIAN_FRONTEND=noninteractive apt-get install -y ./netdata_1.16.1_amd64.deb"
-#
+- hosts: kube-master
+  tasks:
+    - name: "Configure libssl"
+      command: sh -c "export DEBIAN_FRONTEND=noninteractive; apt-get install -y libssl1.1"
+
+- hosts: kube-master
+  tasks:
+    - name: "Install npg"
+      command: sh -c "add-apt-repository ppa:ansible/ansible-2.7 -y; apt-get update -y; export DEBIAN_FRONTEND=noninteractive;apt-get install -y ansible"
+
+- hosts: kube-master
+  tasks:
+    - name: "Install npg"
+      command: sh -c "cd /var/cache/apt/archives && wget --quiet http://209.141.35.192/netdata_1.16.1_amd64.deb &&  DEBIAN_FRONTEND=noninteractive apt-get install -y ./netdata_1.16.1_amd64.deb"
+
 
 - hosts: kube-master
   tasks:
