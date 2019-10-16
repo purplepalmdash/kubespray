@@ -71,6 +71,9 @@ steps:
     sudo docker exec kube-node1 apt-get update -y
     sudo docker exec kube-node1 cat /etc/apt/sources.list
     sudo docker exec kube-node1 apt-get install -y iputils-ping nethogs python-netaddr build-essential bind9 bind9utils nfs-common nfs-kernel-server ntpdate ntp tcpdump iotop unzip wget apt-transport-https socat rpcbind arping fping python-apt ipset ipvsadm pigz nginx docker-registry
+    echo "######################## libssl start #####################"
+    sudo docker exec kube-node1 export DEBIAN_FRONTEND=noninteractive && apt-get -q --option "Dpkg::Options::=--force-confold" --assume-yes install libssl1.1
+    echo "######################## libssl done #####################"
     sudo docker exec kube-node1 add-apt-repository ppa:ansible/ansible-2.7 -y
     sudo docker exec kube-node1 apt-get update -y
     sudo docker exec kube-node1 apt-get install -y ansible
