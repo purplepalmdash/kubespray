@@ -46,7 +46,7 @@ steps:
     sudo docker cp kube-node1:/root/rong_xenial_debs.tar.gz .
     sudo chmod 777 rong_xenial_debs.tar.gz
     sudo docker exec kube-node1 ls /tmp/releases/ -l -h
-    sudo docker cp -r kube-node1:/tmp/releases .
+    sudo docker cp kube-node1:/tmp/releases .
     #### combine.tar and k8s_debs.tar.gz should be uploaded to remote machine
     sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./releases root@209.141.35.192:/root/static/releases_xenial
     sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./rong_xenial_debs.tar.gz root@209.141.35.192:/root/static
@@ -73,7 +73,7 @@ steps:
     sudo ls -l -h /home/vsts/docker/
     sudo docker cp kube-node1:/root/rong_bionic_debs.tar.gz .
     sudo docker exec kube-node1 ls /tmp/releases/ -l -h
-    sudo docker cp -r kube-node1:/tmp/releases .
+    sudo docker cp  kube-node1:/tmp/releases .
     #sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /home/vsts/docker/combine_bionic.tar root@209.141.35.192:/root/static
     sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./releases root@209.141.35.192:/root/static
     sshpass -p $(vpspassword) scp -P2282 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./rong_bionic_debs.tar.gz root@209.141.35.192:/root/static
